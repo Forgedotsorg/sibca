@@ -1,0 +1,1968 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SIBCA — Integrated Building Technology & Life Safety Solutions</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@300;400;500&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg-0: #070D16;
+      --bg-1: #0B1826;
+      --bg-2: #102338;
+      --navy: #16324A;
+      --primary: #E5484D;
+      --primary-light: #FF8A5C;
+      --text: #E8EEF6;
+      --text-dim: #9DB2C7;
+      --text-faint: #5F7691;
+      --glass: linear-gradient(160deg, rgba(21, 38, 58, 0.72), rgba(12, 24, 39, 0.55));
+      --glass-border: rgba(255, 255, 255, 0.09);
+      --ease: cubic-bezier(.16, 1, .3, 1);
+      --font-d: 'Space Grotesk', sans-serif;
+      --font-b: 'Inter', sans-serif;
+    }
+
+    html[data-theme="light"] {
+      --bg-0: #EFF3F8;
+      --bg-1: #FFFFFF;
+      --bg-2: #E3EAF2;
+      --navy: #16324A;
+      --primary: #D93A30;
+      --primary-light: #FF6B52;
+      --text: #14283C;
+      --text-dim: #3E5A75;
+      --text-faint: #587592;
+      --glass: linear-gradient(160deg, #FFFFFF, rgba(244, 248, 252, 0.92));
+      --glass-border: rgba(20, 40, 60, 0.12);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-b);
+      background: var(--bg-0);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+      font-weight: 300;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-family: var(--font-d);
+      font-weight: 600;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    section {
+      position: relative;
+    }
+
+    .wrap {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    .glass {
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: 18px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .rv {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+    }
+
+    .rv.in {
+      opacity: 1;
+      transform: none;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .rv {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+    }
+
+    .img-fallback {
+      background: #111a24;
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 240px;
+      color: var(--text-faint);
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-align: center;
+      padding: 20px;
+    }
+
+    html[data-theme="light"] .img-fallback {
+      background: #DCE5EF;
+    }
+
+    /* Nav */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 18px 0;
+      transition: all 0.4s var(--ease);
+    }
+
+    nav.scrolled {
+      background: rgba(7, 13, 22, 0.82);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: 0 6px 30px rgba(0, 0, 0, 0.3);
+      padding: 12px 0;
+    }
+
+    html[data-theme="light"] nav.scrolled {
+      background: rgba(239, 243, 248, 0.85);
+      box-shadow: 0 6px 24px rgba(20, 40, 60, 0.08);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-family: var(--font-d);
+      font-weight: 700;
+      font-size: 1.5rem;
+      letter-spacing: 1px;
+      color: var(--text);
+    }
+
+    .logo span {
+      color: var(--primary);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      font-size: 0.9rem;
+      color: var(--text-dim);
+      font-weight: 400;
+      transition: color 0.3s var(--ease);
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .nav-actions {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .btn {
+      font-family: var(--font-b);
+      font-weight: 500;
+      font-size: 0.9rem;
+      padding: 12px 24px;
+      border-radius: 40px;
+      cursor: pointer;
+      border: none;
+      transition: all 0.3s var(--ease);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(120deg, var(--primary), var(--primary-light));
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 28px rgba(229, 72, 77, 0.4);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      border: 1px solid var(--glass-border);
+      color: var(--text);
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .theme-btn {
+      background: transparent;
+      border: 1px solid var(--glass-border);
+      color: var(--text);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s var(--ease);
+    }
+
+    .theme-btn:hover {
+      border-color: var(--primary);
+    }
+
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    /* Hero */
+    .hero {
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 120px 0 0;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -10%;
+      right: -10%;
+      width: 60%;
+      height: 80%;
+      background: radial-gradient(circle, rgba(229, 72, 77, 0.22), transparent 65%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: -10%;
+      width: 50%;
+      height: 60%;
+      background: radial-gradient(circle, rgba(255, 138, 92, 0.14), transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--primary-light);
+      font-weight: 500;
+      margin-bottom: 24px;
+      padding: 8px 16px;
+      border: 1px solid var(--glass-border);
+      border-radius: 40px;
+    }
+
+    .eyebrow .dot {
+      width: 7px;
+      height: 7px;
+      background: var(--primary);
+      border-radius: 50%;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.6rem, 7vw, 5.4rem);
+      font-weight: 700;
+      max-width: 15ch;
+      margin-bottom: 26px;
+    }
+
+    .hero h1 .grad {
+      background: linear-gradient(120deg, var(--primary), var(--primary-light));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p.lead {
+      font-size: clamp(1rem, 1.6vw, 1.2rem);
+      color: var(--text-dim);
+      max-width: 60ch;
+      margin-bottom: 38px;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .stats-strip {
+      margin-top: 80px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      border-radius: 18px;
+      overflow: hidden;
+      position: relative;
+      z-index: 2;
+    }
+
+    .stat {
+      padding: 30px 26px;
+    }
+
+    .stat .num {
+      font-family: var(--font-d);
+      font-weight: 700;
+      font-size: clamp(1.8rem, 3.4vw, 2.7rem);
+      color: var(--text);
+    }
+
+    .stat .num span {
+      color: var(--primary);
+    }
+
+    .stat .lbl {
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 6px;
+    }
+
+    /* Section shared */
+    .section {
+      padding: 120px 0;
+    }
+
+    .band {
+      background: var(--bg-1);
+    }
+
+    .sec-head {
+      max-width: 720px;
+      margin-bottom: 60px;
+    }
+
+    .sec-tag {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--primary);
+      font-weight: 600;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .sec-head h2 {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      margin-bottom: 20px;
+    }
+
+    .sec-head p {
+      color: var(--text-dim);
+      font-size: 1.05rem;
+    }
+
+    /* About split */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .about-grid p {
+      color: var(--text-dim);
+      margin-bottom: 20px;
+    }
+
+    .about-grid p strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .about-visual {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .about-visual .glass {
+      padding: 26px;
+    }
+
+    .about-visual h3 {
+      font-size: 2rem;
+      color: var(--primary);
+    }
+
+    .about-visual .big {
+      grid-column: span 2;
+    }
+
+    .about-visual p {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      margin: 0;
+    }
+
+    /* Bento services */
+    .bento {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .bento .card {
+      padding: 32px;
+      overflow: hidden;
+      position: relative;
+      transition: transform 0.4s var(--ease), border-color 0.4s var(--ease), box-shadow 0.4s var(--ease);
+    }
+
+    .bento .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+      border-color: var(--primary);
+    }
+
+    .bento .card .ico {
+      width: 46px;
+      height: 46px;
+      border-radius: 12px;
+      background: rgba(229, 72, 77, 0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 22px;
+      color: var(--primary);
+    }
+
+    .bento .card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 12px;
+    }
+
+    .bento .card p {
+      font-size: 0.9rem;
+      color: var(--text-dim);
+    }
+
+    .bento .card.feat {
+      grid-column: span 2;
+      grid-row: span 2;
+      background: linear-gradient(150deg, var(--navy), var(--bg-2));
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .bento .card.feat h3 {
+      font-size: 1.8rem;
+    }
+
+    .bento .card.wide {
+      grid-column: span 2;
+    }
+
+    /* Process timeline */
+    .timeline {
+      position: relative;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 27px;
+      top: 10px;
+      bottom: 10px;
+      width: 2px;
+      background: linear-gradient(var(--primary), transparent);
+    }
+
+    .tstep {
+      display: flex;
+      gap: 28px;
+      margin-bottom: 40px;
+      position: relative;
+    }
+
+    .tnum {
+      flex-shrink: 0;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--bg-2);
+      border: 1px solid var(--glass-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-d);
+      font-weight: 700;
+      color: var(--primary);
+      z-index: 2;
+    }
+
+    .tstep .body {
+      padding-top: 6px;
+    }
+
+    .tstep h3 {
+      font-size: 1.25rem;
+      margin-bottom: 8px;
+    }
+
+    .tstep p {
+      color: var(--text-dim);
+      font-size: 0.94rem;
+    }
+
+    /* Products filter */
+    .filters {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+
+    .filter-btn {
+      background: transparent;
+      border: 1px solid var(--glass-border);
+      color: var(--text-dim);
+      padding: 10px 20px;
+      border-radius: 40px;
+      cursor: pointer;
+      font-family: var(--font-b);
+      font-size: 0.86rem;
+      transition: all 0.3s var(--ease);
+    }
+
+    .filter-btn.active,
+    .filter-btn:hover {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    .prod-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .prod-card {
+      padding: 24px;
+      transition: transform 0.4s var(--ease), border-color 0.4s var(--ease);
+    }
+
+    .prod-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--primary);
+    }
+
+    .prod-card.hidden {
+      display: none !important;
+    }
+
+    .prod-card .pico {
+      color: var(--primary);
+      margin-bottom: 16px;
+    }
+
+    .prod-card h4 {
+      font-size: 1.05rem;
+      margin-bottom: 6px;
+    }
+
+    .prod-card p {
+      font-size: 0.84rem;
+      color: var(--text-dim);
+    }
+
+    /* Projects */
+    .proj-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .proj-card {
+      overflow: hidden;
+      transition: transform 0.4s var(--ease), border-color 0.4s var(--ease);
+    }
+
+    .proj-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--primary);
+    }
+
+    .proj-card .img-fallback {
+      border-radius: 0;
+      min-height: 220px;
+      border: none;
+      border-bottom: 1px solid var(--glass-border);
+    }
+
+    .proj-body {
+      padding: 30px;
+    }
+
+    .proj-body .loc {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+
+    .proj-body h3 {
+      font-size: 1.5rem;
+      margin-bottom: 14px;
+    }
+
+    .proj-body p {
+      color: var(--text-dim);
+      font-size: 0.92rem;
+      margin-bottom: 16px;
+    }
+
+    .proj-meta {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      border-top: 1px solid var(--glass-border);
+      padding-top: 16px;
+    }
+
+    .proj-meta div span {
+      display: block;
+    }
+
+    .proj-meta .k {
+      font-size: 0.72rem;
+      color: var(--text-faint);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .proj-meta .v {
+      font-family: var(--font-d);
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: var(--text);
+    }
+
+    /* Sectors */
+    .sector-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 14px;
+    }
+
+    .sector {
+      padding: 26px 18px;
+      text-align: center;
+      transition: all 0.3s var(--ease);
+    }
+
+    .sector:hover {
+      border-color: var(--primary);
+      transform: translateY(-4px);
+    }
+
+    .sector .ico {
+      color: var(--primary);
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .sector span {
+      font-size: 0.86rem;
+      color: var(--text-dim);
+    }
+
+    /* Partners */
+    .partner-tabs {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 34px;
+    }
+
+    .partner-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .partner-chip {
+      padding: 12px 22px;
+      border-radius: 40px;
+      font-size: 0.88rem;
+      color: var(--text-dim);
+      font-weight: 400;
+    }
+
+    /* Presence */
+    .presence-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .country {
+      padding: 26px;
+      transition: all 0.3s var(--ease);
+    }
+
+    .country:hover {
+      border-color: var(--primary);
+      transform: translateY(-4px);
+    }
+
+    .country h4 {
+      font-size: 1.1rem;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .country h4 .flagdot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--primary);
+    }
+
+    .country p {
+      font-size: 0.82rem;
+      color: var(--text-dim);
+    }
+
+    /* FAQ */
+    .faq-list {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid var(--glass-border);
+    }
+
+    .faq-q {
+      width: 100%;
+      text-align: left;
+      background: none;
+      border: none;
+      color: var(--text);
+      font-family: var(--font-d);
+      font-weight: 500;
+      font-size: 1.1rem;
+      padding: 26px 0;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .faq-q .plus {
+      flex-shrink: 0;
+      color: var(--primary);
+      transition: transform 0.3s var(--ease);
+      font-size: 1.4rem;
+    }
+
+    .faq-item.open .plus {
+      transform: rotate(45deg);
+    }
+
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s var(--ease);
+    }
+
+    .faq-a p {
+      color: var(--text-dim);
+      padding-bottom: 26px;
+      font-size: 0.95rem;
+    }
+
+    /* Contact */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+
+    .contact-info .glass {
+      padding: 30px;
+      margin-bottom: 16px;
+    }
+
+    .contact-info .row {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .contact-info .ico {
+      color: var(--primary);
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+
+    .contact-info h4 {
+      font-size: 1rem;
+      margin-bottom: 4px;
+    }
+
+    .contact-info p {
+      color: var(--text-dim);
+      font-size: 0.9rem;
+    }
+
+    .form .glass {
+      padding: 36px;
+    }
+
+    .form label {
+      display: block;
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      margin-bottom: 8px;
+    }
+
+    .form input,
+    .form textarea {
+      width: 100%;
+      background: var(--bg-0);
+      border: 1px solid var(--glass-border);
+      border-radius: 10px;
+      padding: 14px;
+      color: var(--text);
+      font-family: var(--font-b);
+      margin-bottom: 20px;
+      font-size: 0.92rem;
+      transition: border-color 0.3s var(--ease);
+    }
+
+    .form input:focus,
+    .form textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    /* Footer */
+    footer {
+      background: var(--bg-1);
+      border-top: 1px solid var(--glass-border);
+      padding: 70px 0 30px;
+    }
+
+    .foot-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 50px;
+    }
+
+    .foot-grid p {
+      color: var(--text-dim);
+      font-size: 0.9rem;
+      max-width: 34ch;
+      margin-top: 16px;
+    }
+
+    .foot-grid h5 {
+      font-family: var(--font-d);
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 18px;
+      color: var(--text);
+    }
+
+    .foot-grid ul {
+      list-style: none;
+    }
+
+    .foot-grid ul li {
+      margin-bottom: 10px;
+    }
+
+    .foot-grid ul li a {
+      color: var(--text-dim);
+      font-size: 0.88rem;
+      transition: color 0.3s var(--ease);
+    }
+
+    .foot-grid ul li a:hover {
+      color: var(--primary);
+    }
+
+    .foot-bottom {
+      border-top: 1px solid var(--glass-border);
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      color: var(--text-faint);
+      font-size: 0.82rem;
+    }
+
+    @media (max-width: 1024px) {
+      .bento {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .prod-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .sector-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .presence-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .foot-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .wrap {
+        padding: 0 20px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .section {
+        padding: 80px 0;
+      }
+
+      .stats-strip {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .bento {
+        grid-template-columns: 1fr;
+      }
+
+      .bento .card.feat,
+      .bento .card.wide {
+        grid-column: span 1;
+        grid-row: span 1;
+      }
+
+      .prod-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .proj-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .sector-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .presence-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .foot-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-actions .btn {
+        display: none;
+      }
+    }
+  </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const nav = document.getElementById('nav');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 40) nav.classList.add('scrolled');
+        else nav.classList.remove('scrolled');
+      });
+
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.rv').forEach(el => obs.observe(el));
+
+      // Theme toggle
+      const tbtn = document.getElementById('themeBtn');
+      tbtn.addEventListener('click', () => {
+        const html = document.documentElement;
+        html.setAttribute('data-theme', html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+      });
+
+      // Filters
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          const cat = btn.dataset.filter;
+          document.querySelectorAll('.prod-card').forEach(card => {
+            if (cat === 'all' || card.dataset.category === cat) card.classList.remove('hidden');
+            else card.classList.add('hidden');
+          });
+        });
+      });
+
+      // FAQ
+      document.querySelectorAll('.faq-q').forEach(q => {
+        q.addEventListener('click', () => {
+          const item = q.parentElement;
+          const a = item.querySelector('.faq-a');
+          const open = item.classList.contains('open');
+          document.querySelectorAll('.faq-item').forEach(i => { i.classList.remove('open'); i.querySelector('.faq-a').style.maxHeight = null; });
+          if (!open) { item.classList.add('open'); a.style.maxHeight = a.scrollHeight + 'px'; }
+        });
+      });
+    });
+  </script>
+</head>
+
+<body>
+
+  <nav id="nav">
+    <div class="wrap nav-inner">
+      <a href="#home" class="logo">SIB<span>CA</span></a>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#services">Solutions</a>
+        <a href="#process">Process</a>
+        <a href="#products">Products</a>
+        <a href="#projects">Projects</a>
+        <a href="#presence">Presence</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="nav-actions">
+        <button class="theme-btn" id="themeBtn" aria-label="Toggle theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+          </svg>
+        </button>
+        <a href="#contact" class="btn btn-primary">Get in Touch</a>
+        <button class="hamburger" aria-label="Menu">
+          <svg width="26" height="26" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none">
+            <path d="M3 6h18M3 12h18M3 18h18" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero" id="home">
+    <div class="wrap hero-inner">
+      <div class="rv eyebrow"><span class="dot"></span>Systems Integration · Since 1977 · United Arab Emirates</div>
+      <h1 class="rv">Protecting What Matters. <span class="grad">Powering the Future.</span></h1>
+      <p class="lead rv">SIBCA is a leading provider of Fire &amp; Life Safety, Building Management Systems, HVAC,
+        Security, ELV, Structured Cabling, Liquid Cooling, Audio-Visual and ICT solutions — engineering safer, smarter
+        and more efficient buildings across the Middle East and beyond.</p>
+      <div class="hero-cta rv">
+        <a href="#services" class="btn btn-primary">Explore Our Solutions
+          <svg width="16" height="16" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none">
+            <path d="M5 12h14M13 6l6 6-6 6" />
+          </svg>
+        </a>
+        <a href="#projects" class="btn btn-ghost">View Landmark Projects</a>
+      </div>
+      <div class="stats-strip glass rv">
+        <div class="stat">
+          <div class="num">48<span>+</span></div>
+          <div class="lbl">Years of Experience</div>
+        </div>
+        <div class="stat">
+          <div class="num">95,000<span>+</span></div>
+          <div class="lbl">Projects Delivered</div>
+        </div>
+        <div class="stat">
+          <div class="num">2,900<span>+</span></div>
+          <div class="lbl">Employees</div>
+        </div>
+        <div class="stat">
+          <div class="num">7</div>
+          <div class="lbl">Countries of Operation</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ABOUT -->
+  <section class="section" id="about">
+    <div class="wrap">
+      <div class="about-grid">
+        <div class="rv">
+          <span class="sec-tag">Who We Are</span>
+          <h2 style="font-size:clamp(2rem,4vw,3rem);margin-bottom:24px;">Nearly five decades of engineering-led building
+            technology.</h2>
+          <p>Established in Abu Dhabi in <strong>1977</strong>, SIBCA (SIBCA Electronics Equipment Co. / SIBCA Group)
+            began with SMATV and Extra-Low Voltage work, and has grown into a multi-discipline systems integration group
+            spanning Fire &amp; Life Safety, Building Management Systems, Security, HVAC, Audio-Visual, Structured
+            Cabling, ICT and Liquid Cooling.</p>
+          <p>As an <strong>end-to-end technology partner</strong>, SIBCA delivers consultancy, engineering, system
+            integration, installation, commissioning and ongoing maintenance — working with international technology
+            partners to provide customized, standards-compliant solutions.</p>
+          <p>The group also includes <strong>SIBCA Energy</strong>, a subsidiary active in renewable energy, oil &amp;
+            gas process technology and energy optimisation.</p>
+        </div>
+        <div class="about-visual rv">
+          <div class="glass big">
+            <h3>1977</h3>
+            <p>Founded in Abu Dhabi — now headquartered in the UAE with a seven-country regional network.</p>
+          </div>
+          <div class="glass">
+            <h3>10+</h3>
+            <p>Core solution disciplines under one integrated group.</p>
+          </div>
+          <div class="glass">
+            <h3>24/7</h3>
+            <p>ITIL-certified customer service desk staffed by certified engineers.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES BENTO -->
+  <section class="section band" id="services">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <span class="sec-tag">Core Solutions</span>
+        <h2>Integrated systems for safer, smarter buildings</h2>
+        <p>A single, coordinated partner across the full spectrum of building technology and life-safety disciplines.
+        </p>
+      </div>
+      <div class="bento">
+        <div class="card feat glass rv">
+          <div>
+            <div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"
+                fill="none">
+                <path d="M12 2c1 4-2 5-2 8a2 2 0 0 0 4 0c0-1 0-2 1-3 2 2 3 4 3 7a6 6 0 0 1-12 0c0-5 6-7 6-12z" />
+              </svg></div>
+            <h3>Fire Protection &amp; Life Safety</h3>
+            <p>Detection, suppression and life-safety systems delivered to NFPA and QCDD standards, supported by a
+              dedicated products range and the GUARD brand line. Authorised Simplex Fire Detection distributor in Qatar.
+            </p>
+          </div>
+          <p style="font-size:0.82rem;color:var(--text-faint);margin-top:24px;">Firefighting capability added 2019 ·
+            GUARD line launched 2025</p>
+        </div>
+        <div class="card glass rv">
+          <div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"
+              fill="none">
+              <rect x="3" y="3" width="18" height="18" rx="2" />
+              <path d="M9 3v18M3 9h6" />
+            </svg></div>
+          <h3>Control &amp; Automation (BMS)</h3>
+          <p>Large-scale KNX-based building management integrating HVAC, lighting, energy and security.</p>
+        </div>
+        <div class="card glass rv">
+          <div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"
+              fill="none">
+              <path d="M4 12h4l3 8 4-16 3 8h2" />
+            </svg></div>
+          <h3>ICT Solutions</h3>
+          <p>Networking, cybersecurity, data protection and enterprise infrastructure.</p>
+        </div>
+        <div class="card wide glass rv">
+          <div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"
+              fill="none">
+              <path d="M2 12h4l3-9 4 18 3-9h6" />
+            </svg></div>
+          <h3>Security Solutions</h3>
+          <p>Surveillance and access-control systems integrated with BMS, ELV and fire &amp; life-safety capabilities.
+          </p>
+        </div>
+        <div class="card glass rv">
+          <div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"
+              fill="none">
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v4M12 18v4M2 12h4M18 12h4" />
+            </svg></div>
+          <h3>HVAC Solutions</h3>
+          <p>Climate systems integrated directly into automation projects.</p>
+        </div>
+        <div class="card glass rv">
+          <div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"
+              fill="none">
+              <rect x="2" y="7" width="20" height="14" rx="2" />
+              <path d="M7 7V4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v3" />
+            </svg></div>
+          <h3>Extra-Low Voltage (ELV)</h3>
+          <p>One of SIBCA's original disciplines since 1977, alongside SMATV.</p>
+        </div>
+        <div class="card glass rv">
+          <div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"
+              fill="none">
+              <rect x="2" y="6" width="20" height="12" rx="2" />
+              <path d="M12 6v12" />
+            </svg></div>
+          <h3>Audio-Visual (AV)</h3>
+          <p>AV systems for commercial, hospitality and institutional environments.</p>
+        </div>
+        <div class="card glass rv">
+          <div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"
+              fill="none">
+              <path d="M4 4h16v6H4zM4 14h16v6H4zM8 7h.01M8 17h.01" />
+            </svg></div>
+          <h3>Structured Cabling</h3>
+          <p>Infrastructure underpinning ICT, BMS and security deployments.</p>
+        </div>
+        <div class="card glass rv">
+          <div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"
+              fill="none">
+              <path d="M6 3v18M18 3v18M6 9h12M6 15h12" />
+            </svg></div>
+          <h3>Liquid Cooling</h3>
+          <p>Cooling systems for data centres and high-density technical environments.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="section" id="process">
+    <div class="wrap">
+      <div class="sec-head rv" style="margin-left:auto;margin-right:auto;text-align:center;">
+        <span class="sec-tag">How We Work</span>
+        <h2>An end-to-end delivery lifecycle</h2>
+        <p>From first consultancy through decades of maintenance — one accountable partner at every stage.</p>
+      </div>
+      <div class="timeline">
+        <div class="tstep rv">
+          <div class="tnum">01</div>
+          <div class="body">
+            <h3>Consultancy &amp; Design</h3>
+            <p>Engineering-led assessment and system design tailored to each building's safety, efficiency and
+              connectivity requirements.</p>
+          </div>
+        </div>
+        <div class="tstep rv">
+          <div class="tnum">02</div>
+          <div class="body">
+            <h3>Engineering &amp; Integration</h3>
+            <p>Multi-discipline system integration combining fire &amp; life safety, automation, security, ICT and more
+              into a coordinated solution.</p>
+          </div>
+        </div>
+        <div class="tstep rv">
+          <div class="tnum">03</div>
+          <div class="body">
+            <h3>Supply &amp; Installation</h3>
+            <p>Product supply and installation delivered by certified engineers in line with NFPA, QCDD and manufacturer
+              standards.</p>
+          </div>
+        </div>
+        <div class="tstep rv">
+          <div class="tnum">04</div>
+          <div class="body">
+            <h3>Commissioning</h3>
+            <p>Rigorous commissioning and testing to validate performance, compliance and reliability before handover.
+            </p>
+          </div>
+        </div>
+        <div class="tstep rv">
+          <div class="tnum">05</div>
+          <div class="body">
+            <h3>Service &amp; Maintenance</h3>
+            <p>Annual Maintenance Contracts, SLAs, 24/7 remote monitoring, spares management, inspection, diagnostics,
+              upgrades and retrofits — backed by an ITIL-certified service desk.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCTS -->
+  <section class="section band" id="products">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <span class="sec-tag">Fire &amp; Life Safety Products</span>
+        <h2>A dedicated range of life-safety equipment</h2>
+        <p>Supporting SIBCA's Fire Protection &amp; Life Safety solutions and its role as an authorised Simplex
+          distributor in Qatar.</p>
+      </div>
+      <div class="filters rv">
+        <button class="filter-btn active" data-filter="all">All Products</button>
+        <button class="filter-btn" data-filter="suppression">Suppression</button>
+        <button class="filter-btn" data-filter="water">Water &amp; Valves</button>
+        <button class="filter-btn" data-filter="components">Components</button>
+      </div>
+      <div class="prod-grid">
+        <div class="prod-card glass rv" data-category="suppression">
+          <div class="pico"><svg width="22" height="22" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"
+              fill="none">
+              <path d="M12 2c1 4-2 5-2 8a2 2 0 0 0 4 0c0-4 3-4 3-8" />
+            </svg></div>
+          <h4>Fire Extinguishers</h4>
+          <p>Portable suppression units for varied fire classes.</p>
+        </div>
+        <div class="prod-card glass rv" data-category="suppression">
+          <div class="pico"><svg width="22" height="22" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"
+              fill="none">
+              <circle cx="12" cy="12" r="9" />
+              <path d="M12 8v8M8 12h8" />
+            </svg></div>
+          <h4>Automatic Sprinklers</h4>
+          <p>Automatic activation for early fire suppression.</p>
+        </div>
+        <div class="prod-card glass rv" data-category="suppression">
+          <div class="pico"><svg width="22" height="22" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"
+              fill="none">
+              <rect x="4" y="4" width="16" height="16" rx="2" />
+            </svg></div>
+          <h4>Fire Blankets</h4>
+          <p>Rapid-response suppression for contained fires.</p>
+        </div>
+        <div class="prod-card glass rv" data-category="suppression">
+          <div class="pico"><svg width="22" height="22" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"
+              fill="none">
+              <path d="M6 20V10a6 6 0 0 1 12 0v10" />
+            </svg></div>
+          <h4>Foam Bladders</h4>
+          <p>Foam-based suppression for specialised hazards.</p>
+        </div>
+        <div class="prod-card glass rv" data-category="water">
+          <div class="pico"><svg width="22" height="22" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"
+              fill="none">
+              <path d="M12 3v6M8 9h8M6 21h12l-2-12H8z" />
+            </svg></div>
+          <h4>Fire Hydrants</h4>
+          <p>External and internal water-supply points.</p>
+        </div>
+        <div class="prod-card glass rv" data-category="water">
+          <div class="pico"><svg width="22" height="22" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"
+              fill="none">
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v4M12 18v4M2 12h4M18 12h4" />
+            </svg></div>
+          <h4>Fire Pumps</h4>
+          <p>Pressurised water delivery for fire systems.</p>
+        </div>
+        <div class="prod-card glass rv" data-category="water">
+          <div class="pico"><svg width="22" height="22" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"
+              fill="none">
+              <path d="M4 12c4-4 12-4 16 0" />
+              <circle cx="12" cy="12" r="2" />
+            </svg></div>
+          <h4>Fire Hose</h4>
+          <p>Durable hose for manual firefighting response.</p>
+        </div>
+        <div class="prod-card glass rv" data-category="water">
+          <div class="pico"><svg width="22" height="22" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"
+              fill="none">
+              <circle cx="12" cy="12" r="3" />
+              <path d="M12 2v4M12 18v4M2 12h4M18 12h4" />
+            </svg></div>
+          <h4>Fire Valves</h4>
+          <p>Control valves for fire-suppression networks.</p>
+        </div>
+        <div class="prod-card glass rv" data-category="water">
+          <div class="pico"><svg width="22" height="22" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"
+              fill="none">
+              <path d="M6 12h12M12 6v12" />
+              <circle cx="12" cy="12" r="9" />
+            </svg></div>
+          <h4>Wet Alarm Valves</h4>
+          <p>Waterflow alarm control for sprinkler systems.</p>
+        </div>
+        <div class="prod-card glass rv" data-category="water">
+          <div class="pico"><svg width="22" height="22" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"
+              fill="none">
+              <rect x="5" y="9" width="14" height="10" rx="1" />
+              <path d="M9 9V6h6v3" />
+            </svg></div>
+          <h4>Landing Valves</h4>
+          <p>Riser outlet valves for floor-level access.</p>
+        </div>
+        <div class="prod-card glass rv" data-category="components">
+          <div class="pico"><svg width="22" height="22" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"
+              fill="none">
+              <path d="M4 8h16v8H4z" />
+              <path d="M8 8V4h8v4" />
+            </svg></div>
+          <h4>Breeching Inlets</h4>
+          <p>External connection points for fire-brigade supply.</p>
+        </div>
+        <div class="prod-card glass rv" data-category="components">
+          <div class="pico"><svg width="22" height="22" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"
+              fill="none">
+              <path d="M4 12h16M4 8h16M4 16h16" />
+            </svg></div>
+          <h4>Fire-Resistance Cable</h4>
+          <p>Cabling engineered to maintain integrity under fire.</p>
+        </div>
+        <div class="prod-card glass rv" data-category="components">
+          <div class="pico"><svg width="22" height="22" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"
+              fill="none">
+              <path d="M12 2l3 7h7l-6 4 2 8-6-5-6 5 2-8-6-4h7z" />
+            </svg></div>
+          <h4>GUARD Product Line</h4>
+          <p>SIBCA's proprietary firefighting range launched in 2025.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="section" id="projects">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <span class="sec-tag">Key Projects</span>
+        <h2>Landmark developments, proven delivery</h2>
+        <p>An independently documented track record delivering large-scale building automation on some of Abu Dhabi's
+          most iconic towers.</p>
+      </div>
+      <div class="proj-grid">
+        <div class="proj-card glass rv">
+          <div class="img-fallback">ADNEC Capital Gate — Abu Dhabi</div>
+          <div class="proj-body">
+            <div class="loc">Abu Dhabi, UAE · 2011</div>
+            <h3>ADNEC Capital Gate</h3>
+            <p>Systems integrator delivering the building-automation infrastructure across 100,000 m² and 38 floors —
+              covering HVAC, lighting, security/safety, energy management and central automation.</p>
+            <div class="proj-meta">
+              <div><span class="k">Scale</span><span class="v">100,000 m²</span></div>
+              <div><span class="k">KNX Lines</span><span class="v">28</span></div>
+              <div><span class="k">Components</span><span class="v">970</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="proj-card glass rv">
+          <div class="img-fallback">Etihad Towers — Abu Dhabi</div>
+          <div class="proj-body">
+            <div class="loc">Abu Dhabi, UAE · Hospitality</div>
+            <h3>Etihad Towers</h3>
+            <p>Systems integrator (delivered alongside Bond Communication) across 300,000 m² and 75 floors, including
+              382 hotel rooms — covering energy/load management, HVAC, visualisation and central automation.</p>
+            <div class="proj-meta">
+              <div><span class="k">Scale</span><span class="v">300,000 m²</span></div>
+              <div><span class="k">KNX Lines</span><span class="v">270</span></div>
+              <div><span class="k">Components</span><span class="v">10,600</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="proj-card glass rv" style="margin-top:24px;">
+        <div class="proj-body">
+          <div class="loc">Qatar · Authorised Distributor</div>
+          <h3>Simplex Fire Detection System</h3>
+          <p>As the authorised distributor for the Simplex Fire Detection System in Qatar, SIBCA provides technical
+            support, product supply, commissioning and spare-parts support — delivered in line with QCDD (Qatar Civil
+            Defence Department), NFPA and manufacturer standards.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTORS -->
+  <section class="section band" id="sectors">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <span class="sec-tag">Industries Served</span>
+        <h2>Trusted across critical sectors</h2>
+      </div>
+      <div class="sector-grid">
+        <div class="sector glass rv">
+          <div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"
+              fill="none">
+              <path d="M4 21V8l8-5 8 5v13M9 21v-6h6v6" />
+            </svg></div><span>Hospitality</span>
+        </div>
+        <div class="sector glass rv">
+          <div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"
+              fill="none">
+              <rect x="4" y="3" width="16" height="18" />
+              <path d="M8 7h.01M12 7h.01M16 7h.01M8 11h.01M12 11h.01M16 11h.01" />
+            </svg></div><span>Commercial</span>
+        </div>
+        <div class="sector glass rv">
+          <div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"
+              fill="none">
+              <path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6" />
+            </svg></div><span>Government</span>
+        </div>
+        <div class="sector glass rv">
+          <div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"
+              fill="none">
+              <path d="M3 21h18M6 21V11l6-4 6 4v10M10 15h4" />
+            </svg></div><span>Industrial</span>
+        </div>
+        <div class="sector glass rv">
+          <div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"
+              fill="none">
+              <path d="M12 2v6M8 6l4 4 4-4M5 20h14l-2-8H7z" />
+            </svg></div><span>Oil &amp; Gas</span>
+        </div>
+        <div class="sector glass rv">
+          <div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"
+              fill="none">
+              <rect x="3" y="3" width="18" height="18" rx="2" />
+              <path d="M9 9h6v6H9z" />
+            </svg></div><span>Smart Buildings</span>
+        </div>
+        <div class="sector glass rv">
+          <div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"
+              fill="none">
+              <path d="M2 12h4l3-9 4 18 3-9h6" />
+            </svg></div><span>Infrastructure</span>
+        </div>
+        <div class="sector glass rv">
+          <div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"
+              fill="none">
+              <rect x="3" y="4" width="18" height="6" rx="1" />
+              <rect x="3" y="14" width="18" height="6" rx="1" />
+              <path d="M7 7h.01M7 17h.01" />
+            </svg></div><span>Data Centres</span>
+        </div>
+        <div class="sector glass rv">
+          <div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"
+              fill="none">
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v4M12 18v4M2 12h4M18 12h4" />
+            </svg></div><span>Energy</span>
+        </div>
+        <div class="sector glass rv">
+          <div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"
+              fill="none">
+              <rect x="2" y="4" width="20" height="14" rx="2" />
+              <path d="M8 20h8" />
+            </svg></div><span>ICT / Technology</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SIBCA ENERGY -->
+  <section class="section" id="energy">
+    <div class="wrap">
+      <div class="about-grid">
+        <div class="rv">
+          <span class="sec-tag">SIBCA Energy</span>
+          <h2 style="font-size:clamp(2rem,4vw,3rem);margin-bottom:24px;">Powering a more sustainable future</h2>
+          <p>SIBCA Energy, a subsidiary of SIBCA Group chaired by Ibrahim Lari, is active in renewable energy, solar
+            power, hydrogen vehicles, carbon capture, energy conservation, emissions reduction and Industry 4.0
+            automation.</p>
+          <p>Its specialised oil &amp; gas offering covers process optimisation, yield optimisation, energy
+            optimisation, digital twins and simulation software. The subsidiary maintains research relationships with
+            international research centres and European academic institutions.</p>
+          <p style="color:var(--text-faint);font-size:0.9rem;">Partner network includes SEDI (Germany) and ATCCO
+            (Jordan). Energy optimisation has been part of SIBCA's capability since 2007.</p>
+        </div>
+        <div class="about-visual rv">
+          <div class="glass big">
+            <h3>2007</h3>
+            <p>Energy optimisation established as a core-group service line.</p>
+          </div>
+          <div class="glass">
+            <h3>Solar</h3>
+            <p>Renewable energy &amp; carbon-capture programmes.</p>
+          </div>
+          <div class="glass">
+            <h3>H₂</h3>
+            <p>Hydrogen vehicle technology exploration.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARTNERS -->
+  <section class="section band" id="partners">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <span class="sec-tag">Technology Partners &amp; Brands</span>
+        <h2>Building on world-class technology</h2>
+        <p>SIBCA integrates technology from leading global manufacturers across its BMS, ICT and Fire &amp; Life Safety
+          practices.</p>
+      </div>
+      <div class="rv" style="margin-bottom:36px;">
+        <h4 style="margin-bottom:16px;color:var(--primary);">Building Automation / BMS</h4>
+        <div class="partner-list">
+          <span class="partner-chip glass">Johnson Controls</span><span class="partner-chip glass">ABB</span><span
+            class="partner-chip glass">Honeywell</span><span class="partner-chip glass">Rockwell Automation</span><span
+            class="partner-chip glass">LOYTEC</span><span class="partner-chip glass">Phoenix Controls</span><span
+            class="partner-chip glass">Janitza</span><span class="partner-chip glass">Helvatron</span><span
+            class="partner-chip glass">ADFweb</span>
+        </div>
+      </div>
+      <div class="rv" style="margin-bottom:36px;">
+        <h4 style="margin-bottom:16px;color:var(--primary);">ICT Ecosystem</h4>
+        <div class="partner-list">
+          <span class="partner-chip glass">Cisco</span><span class="partner-chip glass">Huawei</span><span
+            class="partner-chip glass">Microsoft</span><span class="partner-chip glass">Oracle</span><span
+            class="partner-chip glass">VMware</span><span class="partner-chip glass">Dell</span><span
+            class="partner-chip glass">HP</span><span class="partner-chip glass">NetApp</span><span
+            class="partner-chip glass">Veeam</span><span class="partner-chip glass">Trend Micro</span><span
+            class="partner-chip glass">SailPoint</span><span class="partner-chip glass">Alcatel-Lucent</span><span
+            class="partner-chip glass">Cisco Meraki</span><span class="partner-chip glass">SolarWinds</span><span
+            class="partner-chip glass">Synology</span><span class="partner-chip glass">Outpost24</span>
+        </div>
+      </div>
+      <div class="rv">
+        <h4 style="margin-bottom:16px;color:var(--primary);">Fire &amp; Life Safety · Energy</h4>
+        <div class="partner-list">
+          <span class="partner-chip glass">Simplex</span><span class="partner-chip glass">SEDI (Germany)</span><span
+            class="partner-chip glass">ATCCO (Jordan)</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICE & SUPPORT -->
+  <section class="section" id="support">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <span class="sec-tag">Service &amp; Support</span>
+        <h2>Lifecycle care, around the clock</h2>
+        <p>A comprehensive maintenance capability across every solution area — backed by an ITIL-certified 24/7 customer
+          service desk staffed by certified engineers.</p>
+      </div>
+      <div class="bento" style="grid-template-columns:repeat(4,1fr);">
+        <div class="card glass rv">
+          <h3 style="font-size:1.05rem;">Annual Maintenance Contracts</h3>
+          <p>Structured AMC agreements across all disciplines.</p>
+        </div>
+        <div class="card glass rv">
+          <h3 style="font-size:1.05rem;">Service Level Agreements</h3>
+          <p>Guaranteed response and resolution commitments.</p>
+        </div>
+        <div class="card glass rv">
+          <h3 style="font-size:1.05rem;">24/7 Remote Monitoring</h3>
+          <p>Continuous oversight of critical building systems.</p>
+        </div>
+        <div class="card glass rv">
+          <h3 style="font-size:1.05rem;">Spares Management</h3>
+          <p>Managed spare-parts supply and inventory.</p>
+        </div>
+        <div class="card glass rv">
+          <h3 style="font-size:1.05rem;">Inspection &amp; Diagnostics</h3>
+          <p>Preventive checks and fault diagnosis.</p>
+        </div>
+        <div class="card glass rv">
+          <h3 style="font-size:1.05rem;">Upgrades &amp; Retrofits</h3>
+          <p>Modernising legacy systems to current standards.</p>
+        </div>
+        <div class="card glass rv">
+          <h3 style="font-size:1.05rem;">24/7 Operations Support</h3>
+          <p>Always-on operational assistance.</p>
+        </div>
+        <div class="card glass rv">
+          <h3 style="font-size:1.05rem;">Standards Compliance</h3>
+          <p>Delivered to NFPA, QCDD and ITIL frameworks.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRESENCE -->
+  <section class="section band" id="presence">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <span class="sec-tag">Global Presence</span>
+        <h2>A seven-country regional network</h2>
+        <p>Spanning the Gulf, the Levant and South Asia — headquartered in the United Arab Emirates.</p>
+      </div>
+      <div class="presence-grid">
+        <div class="country glass rv">
+          <h4><span class="flagdot"></span>UAE</h4>
+          <p>Headquarters. Branch network across Abu Dhabi, Dubai, Al Ain, Sharjah, Ras Al Khaimah, Ajman, Fujairah
+            &amp; Umm Al Quwain.</p>
+        </div>
+        <div class="country glass rv">
+          <h4><span class="flagdot"></span>Saudi Arabia</h4>
+          <p>Riyadh — established 2023.</p>
+        </div>
+        <div class="country glass rv">
+          <h4><span class="flagdot"></span>Qatar</h4>
+          <p>Doha — established 2015. Base for the Simplex Fire Detection distributorship.</p>
+        </div>
+        <div class="country glass rv">
+          <h4><span class="flagdot"></span>Bahrain</h4>
+          <p>Manama — established 2005, the company's first international branch.</p>
+        </div>
+        <div class="country glass rv">
+          <h4><span class="flagdot"></span>India</h4>
+          <p>Thiruvananthapuram (2020) &amp; Kochi (2025) engineering operations.</p>
+        </div>
+        <div class="country glass rv">
+          <h4><span class="flagdot"></span>Egypt</h4>
+          <p>New Cairo — launched 1 July 2025, covering Fire &amp; Life Safety, ICT &amp; lifecycle services.</p>
+        </div>
+        <div class="country glass rv">
+          <h4><span class="flagdot"></span>Syria</h4>
+          <p>Operations launched 2025.</p>
+        </div>
+        <div class="country glass rv" style="background:linear-gradient(150deg,var(--navy),var(--bg-2));">
+          <h4 style="color:var(--primary);">Recognition</h4>
+          <p>Chairman &amp; CEO Ibrahim Lari — Executive of the Year, Safety &amp; Security (2023 Middle East Management
+            Excellence Awards).</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" id="faq">
+    <div class="wrap">
+      <div class="sec-head rv" style="margin:0 auto 60px;text-align:center;">
+        <span class="sec-tag">FAQ</span>
+        <h2>Frequently asked questions</h2>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item rv"><button class="faq-q">What is SIBCA?<span class="plus">+</span></button>
+          <div class="faq-a">
+            <p>SIBCA is a UAE-headquartered systems integration group founded in 1977, providing Fire &amp; Life Safety,
+              Building Automation (BMS), Security, HVAC, Audio-Visual, ICT, Structured Cabling and Liquid Cooling
+              solutions, together with an energy-sector subsidiary, SIBCA Energy.</p>
+          </div>
+        </div>
+        <div class="faq-item rv"><button class="faq-q">Where does SIBCA operate?<span class="plus">+</span></button>
+          <div class="faq-a">
+            <p>SIBCA is headquartered in the United Arab Emirates and currently operates in the UAE, Saudi Arabia,
+              Qatar, Bahrain, India, Egypt and Syria, with a regional office network built up since 1977.</p>
+          </div>
+        </div>
+        <div class="faq-item rv"><button class="faq-q">What services does SIBCA provide?<span
+              class="plus">+</span></button>
+          <div class="faq-a">
+            <p>Fire Protection &amp; Life Safety, Extra-Low Voltage (ELV) Systems, Control &amp; Automation (BMS),
+              Security, HVAC, Audio-Visual, Structured Cabling, ICT and Liquid Cooling solutions, along with ongoing
+              maintenance and support and an energy-sector offering through SIBCA Energy.</p>
+          </div>
+        </div>
+        <div class="faq-item rv"><button class="faq-q">Who leads SIBCA?<span class="plus">+</span></button>
+          <div class="faq-a">
+            <p>Ibrahim Lari is Chairman &amp; CEO of SIBCA and Chairman of SIBCA Energy. Khalil Lari is SIBCA's Chief
+              Technology Officer.</p>
+          </div>
+        </div>
+        <div class="faq-item rv"><button class="faq-q">Does SIBCA offer ongoing maintenance and support?<span
+              class="plus">+</span></button>
+          <div class="faq-a">
+            <p>Yes. SIBCA provides Annual Maintenance Contracts, Service Level Agreements, 24/7 remote monitoring,
+              spares management, inspection, diagnostics, upgrades and retrofits, backed by an ITIL-certified 24/7
+              customer service desk staffed by certified engineers.</p>
+          </div>
+        </div>
+        <div class="faq-item rv"><button class="faq-q">Which standards does SIBCA follow?<span
+              class="plus">+</span></button>
+          <div class="faq-a">
+            <p>SIBCA's fire and life-safety work follows NFPA (National Fire Protection Association) codes and QCDD
+              (Qatar Civil Defence Department) requirements, and its customer service desk operates to the ITIL
+              framework.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section band" id="contact">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <span class="sec-tag">Get in Touch</span>
+        <h2>Let's engineer your next project</h2>
+        <p>Speak to our team about consultancy, design, integration, installation, commissioning or maintenance.</p>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-info rv">
+          <div class="glass">
+            <div class="row" style="margin-bottom:24px;">
+              <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"
+                  fill="none">
+                  <path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg></div>
+              <div>
+                <h4>Head Office</h4>
+                <p>SIBCA Building, Behind Etisalat Main Building, Al Khalidiya, Abu Dhabi, 46944, United Arab Emirates
+                </p>
+              </div>
+            </div>
+            <div class="row" style="margin-bottom:24px;">
+              <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"
+                  fill="none">
+                  <path
+                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.9.36 1.78.7 2.62a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.46-1.27a2 2 0 0 1 2.11-.45c.84.34 1.72.57 2.62.7A2 2 0 0 1 22 16.92z" />
+                </svg></div>
+              <div>
+                <h4>Phone</h4>
+                <p>+971 2 497 8600</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"
+                  fill="none">
+                  <rect x="2" y="4" width="20" height="16" rx="2" />
+                  <path d="M22 7l-10 6L2 7" />
+                </svg></div>
+              <div>
+                <h4>Email</h4>
+                <p>info@sibca.com</p>
+              </div>
+            </div>
+          </div>
+          <div class="glass" style="padding:30px;">
+            <div class="row">
+              <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"
+                  fill="none">
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M2 12h20M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20z" />
+                </svg></div>
+              <div>
+                <h4>Website</h4>
+                <p>www.sibca.com · sibcaenergy.com</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form rv">
+          <div class="glass">
+            <form onsubmit="return false;">
+              <label>Full Name</label>
+              <input type="text" placeholder="Your name">
+              <label>Email Address</label>
+              <input type="email" placeholder="you@company.com">
+              <label>Company / Project</label>
+              <input type="text" placeholder="Organisation or project name">
+              <label>How can we help?</label>
+              <textarea rows="4" placeholder="Tell us about your requirements…"></textarea>
+              <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;">Send
+                Enquiry</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="wrap">
+      <div class="foot-grid">
+        <div>
+          <a href="#home" class="logo">SIB<span>CA</span></a>
+          <p>Integrated building technology &amp; life-safety solutions. Protecting what matters, powering the future —
+            since 1977.</p>
+        </div>
+        <div>
+          <h5>Solutions</h5>
+          <ul>
+            <li><a href="#services">Fire &amp; Life Safety</a></li>
+            <li><a href="#services">Building Management</a></li>
+            <li><a href="#services">Security &amp; ELV</a></li>
+            <li><a href="#services">ICT &amp; Cabling</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>Company</h5>
+          <ul>
+            <li><a href="#about">About SIBCA</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#energy">SIBCA Energy</a></li>
+            <li><a href="#partners">Partners</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>Contact</h5>
+          <ul>
+            <li><a href="tel:+97124978600">+971 2 497 8600</a></li>
+            <li><a href="mailto:info@sibca.com">info@sibca.com</a></li>
+            <li><a href="#contact">Abu Dhabi, UAE</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="foot-bottom">
+        <span>© 2025 SIBCA — SIBCA Electronics Equipment Co. All rights reserved.</span>
+        <span>Fire &amp; Life Safety · Building Technology · ICT · Energy</span>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>
